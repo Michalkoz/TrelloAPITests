@@ -16,6 +16,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
@@ -34,6 +35,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createOrganizationWithEmptyDisplayName() {
+
         given()
                 .spec(reqSpec)
                 .queryParam("displayName", "")
@@ -45,6 +47,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithOneLetterInDisplayNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", "f")
@@ -63,6 +66,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithOneNumberAndSpecificSignInDisplayNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", "1$")
@@ -81,6 +85,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWith257SignsInDisplayNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmm")
@@ -99,6 +104,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWith101SignsInDisplayNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhjjjjjjjjjjkkkkkkkkkkl")
@@ -117,6 +123,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWith100SignsInDisplayNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhjjjjjjjjjjkkkkkkkkkk")
@@ -135,6 +142,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithUniqueNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
@@ -155,66 +163,46 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithUppercaseLettersOfNameTest() {
-        Response response = given()
+
+        given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
                 .queryParam("name", "Organization_Test_Name_042021")
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
-                .statusCode(400)
-                .extract()
-                .response();
-
-        JsonPath jsonPath = response.jsonPath();
-        String organizationId = jsonPath.getString("id");
-        Assertions.assertThat(jsonPath.getString("name")).isEqualTo("Organization_Test_Name_042021");
-
-        delete(BASE_URL + "/" + ORGANIZATION + "/" + organizationId);
+                .statusCode(400);
     }
 
     @Test
     public void createNewOrganizationWithSpacesBetweenCharsOfNameTest() {
-        Response response = given()
+
+        given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
                 .queryParam("name", "organization test name 042021")
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
-                .statusCode(400)
-                .extract()
-                .response();
-
-        JsonPath jsonPath = response.jsonPath();
-        String organizationId = jsonPath.getString("id");
-        Assertions.assertThat(jsonPath.getString("name")).isEqualTo("organization test name 042021");
-
-        delete(BASE_URL + "/" + ORGANIZATION + "/" + organizationId);
+                .statusCode(400);
     }
 
     @Test
     public void createNewOrganizationWithTwoSignsOfNameTest() {
-        Response response = given()
+
+        given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
                 .queryParam("name", "ur")
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
-                .statusCode(400)
-                .extract()
-                .response();
-
-        JsonPath jsonPath = response.jsonPath();
-        String organizationId = jsonPath.getString("id");
-        Assertions.assertThat(jsonPath.getString("name")).isEqualTo("ur");
-
-        delete(BASE_URL + "/" + ORGANIZATION + "/" + organizationId);
+                .statusCode(400);
     }
 
     @Test
     public void createNewOrganizationWithSpecificStringOfNameTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
@@ -235,6 +223,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithHTTPWebsiteParameterTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
@@ -255,6 +244,7 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithHTTPSWebsiteParameterTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
@@ -275,26 +265,20 @@ public class OrganizationTest extends Utils {
 
     @Test
     public void createNewOrganizationWithoutProtocolOfWebsiteParameterTest() {
-        Response response = given()
+
+        given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
                 .queryParam("website", "www.michal.kozakiewicz.pl")
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
-                .statusCode(400)
-                .extract()
-                .response();
-
-        JsonPath jsonPath = response.jsonPath();
-        String organizationId = jsonPath.getString("id");
-        Assertions.assertThat(jsonPath.getString("website")).isEqualTo("www.michal.kozakiewicz.pl");
-
-        delete(BASE_URL + "/" + ORGANIZATION + "/" + organizationId);
+                .statusCode(400);
     }
 
     @Test
     public void createNewOrganizationWithFullListOfParametersTest() {
+
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("displayName", fakeFunnyDisplayName)
