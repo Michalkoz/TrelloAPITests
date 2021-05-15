@@ -89,7 +89,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", StringGenerator.stringGenerator(257))
+                .queryParam("displayName", StringGenerator.lengthOfGeneratedString(257))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
@@ -108,7 +108,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", StringGenerator.stringGenerator(101))
+                .queryParam("displayName", StringGenerator.lengthOfGeneratedString(101))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
@@ -127,7 +127,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", StringGenerator.stringGenerator(100))
+                .queryParam("displayName", StringGenerator.lengthOfGeneratedString(100))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
