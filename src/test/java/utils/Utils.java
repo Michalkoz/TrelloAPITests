@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 
 public class Utils extends BaseTest {
 
-    public void delete (String param){
+    public static void delete (String param){
         given()
                 .spec(reqSpec)
                 .when()

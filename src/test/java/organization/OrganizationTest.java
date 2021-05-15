@@ -4,6 +4,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import utils.StringGenerator;
 import utils.Utils;
 
 import static io.restassured.RestAssured.given;
@@ -88,7 +89,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmm")
+                .queryParam("displayName", StringGenerator.stringGenerator(257))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
@@ -107,7 +108,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhjjjjjjjjjjkkkkkkkkkkl")
+                .queryParam("displayName", StringGenerator.stringGenerator(101))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
@@ -126,7 +127,7 @@ public class OrganizationTest extends Utils {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName", "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhjjjjjjjjjjkkkkkkkkkk")
+                .queryParam("displayName", StringGenerator.stringGenerator(100))
                 .when()
                 .post(BASE_URL + "/" + ORGANIZATION)
                 .then()
